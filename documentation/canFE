@@ -1,6 +1,7 @@
+-- 500k baud rate
 1. Make new Project
 2. Take CAN and drag it to pins PB8 and PB9
-3. Set Prescaler (for Time Quantum) parameter to 6
+3. Set Prescaler (for Time Quantum) parameter to 12
 4. Set clock PLLMult to x6
 -----> Check attached PDF for full clock setting photo.
 5. Click build to generate code
