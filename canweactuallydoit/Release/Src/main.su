@@ -1,0 +1,5 @@
+main.c:148:6:SystemClock_Config	168	static
+main.c:77:5:main	72	static
+main.c:294:6:HAL_CAN_TxMailbox0CompleteCallback	0	static
+main.c:297:6:HAL_CAN_RxFifo0MsgPendingCallback	8	static
+main.c:307:6:Error_Handler	0	static

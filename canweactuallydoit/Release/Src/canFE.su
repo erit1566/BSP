@@ -1,0 +1,5 @@
+canFE.c:12:6:CANFE_headerInit	0	static
+canFE.c:18:6:CANFE_setID	0	static
+canFE.c:22:6:CANFE_setExtID	0	static
+canFE.c:26:6:CANFE_AddTxMessage	24	static
+canFE.c:40:6:CANFE_setTxData	12	static
