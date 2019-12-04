@@ -23,52 +23,22 @@
 #include "canFE.h"
 #include "stm32f3xx_hal_can.h"
 #include <stdio.h>
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 CAN_HandleTypeDef hcan;
-CAN_TxHeaderTypeDef TxHeader;
-CAN_RxHeaderTypeDef RxHeader;
 UART_HandleTypeDef huart2;
 CAN_FilterTypeDef sFilterConfig;
-
-/* USER CODE BEGIN PV */
-uint8_t TxData[8];
-uint8_t RxData[8];
+CAN_TxHeaderTypeDef TxHeader;//Added this to define a TxHeader object
+CAN_RxHeaderTypeDef RxHeader;//Added this to define an RxHeader Object
+uint8_t TxData[8];//created a datatype for the sending of messages
+uint8_t RxData[8];// same but for recieving
 uint32_t TxMailBox;
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_CAN_Init(void);
 static void MX_USART2_UART_Init(void);
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -76,32 +46,18 @@ static void MX_USART2_UART_Init(void);
   */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-  
-
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_CAN_Init();
   MX_USART2_UART_Init();
-  /* USER CODE BEGIN 2 */
 
 //sFilterConfig.FilterBank = 0;
 //sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -115,7 +71,7 @@ int main(void)
 //sFilterConfig.SlaveStartFilterBank = 14;
 
 if(HAL_CAN_ConfigFilter(&hcan, &sFilterConfig)!= HAL_OK){
-	Error_Handler();
+	Error_Handler();//added error handling
 }
 
 
@@ -192,14 +148,6 @@ void SystemClock_Config(void)
   */
 static void MX_CAN_Init(void)
 {
-
-  /* USER CODE BEGIN CAN_Init 0 */
-
-  /* USER CODE END CAN_Init 0 */
-
-  /* USER CODE BEGIN CAN_Init 1 */
-
-  /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN;
   hcan.Init.Prescaler = 3;
   hcan.Init.Mode = CAN_MODE_NORMAL;
@@ -216,10 +164,6 @@ static void MX_CAN_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN CAN_Init 2 */
-
-  /* USER CODE END CAN_Init 2 */
-
 }
 
 /**
@@ -229,14 +173,6 @@ static void MX_CAN_Init(void)
   */
 static void MX_USART2_UART_Init(void)
 {
-
-  /* USER CODE BEGIN USART2_Init 0 */
-
-  /* USER CODE END USART2_Init 0 */
-
-  /* USER CODE BEGIN USART2_Init 1 */
-
-  /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
   huart2.Init.BaudRate = 38400;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
@@ -251,10 +187,6 @@ static void MX_USART2_UART_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN USART2_Init 2 */
-
-  /* USER CODE END USART2_Init 2 */
-
 }
 
 /**
@@ -290,7 +222,6 @@ static void MX_GPIO_Init(void)
 
 }
 
-/* USER CODE BEGIN 4 */
 void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
 	HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_2);
 }
@@ -298,7 +229,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 	HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&RxHeader,RxData);
 	HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_2);
 }
-/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -306,10 +236,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
   */
 void Error_Handler(void)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-
-  /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT

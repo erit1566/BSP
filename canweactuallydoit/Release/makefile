@@ -40,8 +40,13 @@ canweactuallydoit.bin \
 all: canweactuallydoit.elf secondary-outputs
 
 # Tool invocations
+<<<<<<< HEAD
 canweactuallydoit.elf: $(OBJS) $(USER_OBJS) C:\Users\brenn\iCloudDrive\FormE\Code\App\canweactuallydoit\STM32F303RETX_FLASH.ld
 	arm-none-eabi-gcc -o "canweactuallydoit.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\brenn\iCloudDrive\FormE\Code\App\canweactuallydoit\STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="canweactuallydoit.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+=======
+canweactuallydoit.elf: $(OBJS) $(USER_OBJS) C:\Users\Eric\Documents\canweactuallydoit\STM32F303RETX_FLASH.ld
+	arm-none-eabi-gcc -o "canweactuallydoit.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Eric\Documents\canweactuallydoit\STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="canweactuallydoit.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+>>>>>>> 3fb83cb3414f7307a9b92dd0b4cd79cf0230044b
 	@echo 'Finished building target: $@'
 	@echo ' '
 
